@@ -34,7 +34,7 @@ class Data:
         plt.close()
         self.ind = 0 
         global dir 
-        dir = filedialog.askdirectory(initialdir = "https://github.com/ChriMala/DICOM/tree/main/Pseudo-PHI-DICOM-Data")
+        dir = filedialog.askdirectory(initialdir = os.path.dirname(__file__) + "\\Pseudo-PHI-DICOM-Data")
         global files 
         files = os.listdir(dir)
 
@@ -92,5 +92,4 @@ indice = Data()
 
 root = tk.Tk()
 root.withdraw() #cancella la finestra di dialogo iniziale
-
 indice.chooseFolder(1)
