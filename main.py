@@ -27,7 +27,7 @@ class Data:
         plt.close()
         self.ind = 0 
         global dir 
-        dir = filedialog.askdirectory(initialdir = "C:\\Users\\chrim\\Desktop\\dicom\\Pseudo-PHI-DICOM-Data")
+        dir = filedialog.askdirectory(initialdir = "https://github.com/ChriMala/DICOM/tree/main/Pseudo-PHI-DICOM-Data")
         global files 
         files = os.listdir(dir)
 
