@@ -7,7 +7,10 @@ import os
 from vedo import load,show
 
 class Data:
+
     ind = 0
+
+#passa all'immagine prima (se è la prima immagine, salta all'ultima)
 
     def prev(self, event):
         if not self.ind:
@@ -16,12 +19,16 @@ class Data:
             self.ind -= 1
         self.openImage()
 
+#passa all'immagine dopo (se è l'ultima immagine, salta alla prima)
+
     def next(self, event):
         if self.ind == len(files) - 1:
                 self.ind = 0
         else:
             self.ind += 1
         self.openImage()
+
+#scelta cartella con le immagini
 
     def chooseFolder(self, event):
         plt.close()
@@ -30,6 +37,8 @@ class Data:
         dir = filedialog.askdirectory(initialdir = "https://github.com/ChriMala/DICOM/tree/main/Pseudo-PHI-DICOM-Data")
         global files 
         files = os.listdir(dir)
+
+    #creazione pulsanti
 
         axprev = plt.axes([0.850, 0.870, 0.140, 0.075])
         axnext = plt.axes([0.850, 0.785, 0.140, 0.075])
@@ -45,14 +54,19 @@ class Data:
         b3d   = Button(ax3d,"3D")
         bexit = Button(axexit,"Esci")
 
+    #associazione funzione ad ogni pulsante
+
         bprev.on_clicked(self.prev)
         bnext.on_clicked(self.next)
+        bsel.on_clicked(self.mask)
         bfold.on_clicked(self.chooseFolder)
         b3d.on_clicked(self.plot3D)
         bexit.on_clicked(self.exit)
 
         self.openImage()
-        
+
+#apre l'immagine
+
     def openImage(self):
         image = pydicom.dcmread(dir + "\\" + files[self.ind])
 
@@ -61,11 +75,15 @@ class Data:
     
         plt.show()
 
-    def exit(self, event):
+#termina l'esecuzione
+
+    def exit(self, event): 
         plt.close()
         exit()
 
-    def plot3D(self, event):
+#crea un volume 3d da una cartella di immagini
+
+    def plot3D(self, event): 
         plt.close()
         show(load(dir), bg = 'white')
 
@@ -73,10 +91,6 @@ class Data:
 indice = Data()
 
 root = tk.Tk()
-root.withdraw()
-
-#dir = filedialog.askdirectory(initialdir = "C:\\Users\\chrim\\Desktop\\dicom\\Pseudo-PHI-DICOM-Data")
-#files = os.listdir(dir)
-
+root.withdraw() #cancella la finestra di dialogo iniziale
 
 indice.chooseFolder(1)
