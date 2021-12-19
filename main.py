@@ -42,14 +42,12 @@ class Data:
 
         axprev = plt.axes([0.850, 0.870, 0.140, 0.075])
         axnext = plt.axes([0.850, 0.785, 0.140, 0.075])
-        axsel  = plt.axes([0.850, 0.700, 0.140, 0.075])
-        axfold = plt.axes([0.850, 0.615, 0.140, 0.075])
-        ax3d   = plt.axes([0.850, 0.530, 0.140, 0.075])
-        axexit = plt.axes([0.850, 0.445, 0.140, 0.075])
+        axfold = plt.axes([0.850, 0.700, 0.140, 0.075])
+        ax3d   = plt.axes([0.850, 0.615, 0.140, 0.075])
+        axexit = plt.axes([0.850, 0.530, 0.140, 0.075])
 
         bprev = Button(axprev,"Precedente")
         bnext = Button(axnext,"Successiva")
-        bsel  = Button(axsel,"Seleziona")
         bfold = Button(axfold,"Cartella")
         b3d   = Button(ax3d,"3D")
         bexit = Button(axexit,"Esci")
@@ -58,7 +56,6 @@ class Data:
 
         bprev.on_clicked(self.prev)
         bnext.on_clicked(self.next)
-        bsel.on_clicked(self.mask)
         bfold.on_clicked(self.chooseFolder)
         b3d.on_clicked(self.plot3D)
         bexit.on_clicked(self.exit)
@@ -74,19 +71,18 @@ class Data:
         plt.imshow(image.pixel_array, cmap = plt.cm.bone)
     
         plt.show()
-
-#termina l'esecuzione
-
-    def exit(self, event): 
-        plt.close()
-        exit()
-
+        
 #crea un volume 3d da una cartella di immagini
 
     def plot3D(self, event): 
         plt.close()
         show(load(dir), bg = 'white')
+        
+#termina l'esecuzione
 
+    def exit(self, event): 
+        plt.close()
+        exit()
 
 indice = Data()
 
